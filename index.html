@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><meta name="theme-color" content="#102a22">
+<title>Petualangan Nusantara — Misi Belajar</title><link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app-shell">
+<header class="topbar"><div class="brand-mark">✦</div><div><div class="eyebrow">GAME EDUKASI • PETUALANGAN 2.5D</div><h1>Petualangan <span>Nusantara</span></h1></div><button id="soundToggle" class="icon-btn" aria-label="Suara">♫ <span id="soundLabel">Suara ON</span></button></header>
+<main>
+<section id="homeScreen" class="screen home-screen">
+  <div class="hero-copy"><div class="pill">🌿 JELAJAHI • BELAJAR • MENANG</div><h2>Jadilah pahlawan<br><em>penjaga Nusantara!</em></h2><p>Jelajahi hutan, hindari serangan musuh, dan jawab tantangan pelajaran untuk membuka jalan menuju kemenangan.</p>
+  <div class="home-stats"><div><b>10</b><small>Soal per misi</small></div><div><b>6</b><small>Kelas SD</small></div><div><b>9</b><small>Mata pelajaran</small></div></div></div>
+  <div class="setup-card"><h3>Siapkan petualangan</h3>
+    <label for="classSelect">Kelas</label><select id="classSelect"><option value="1">Kelas 1 SD</option><option value="2">Kelas 2 SD</option><option value="3" selected>Kelas 3 SD</option><option value="4">Kelas 4 SD</option><option value="5">Kelas 5 SD</option><option value="6">Kelas 6 SD</option></select>
+    <label for="subjectSelect">Mata pelajaran</label><select id="subjectSelect"><option>Matematika</option><option>Bahasa Indonesia</option><option>Pendidikan Agama Islam</option><option>Pendidikan Pancasila</option><option>IPAS</option><option>Bahasa Jawa</option><option>Bahasa Inggris</option><option>PJOK</option><option>Koding</option><option>Seni Rupa</option></select>
+    <label>Mode pemain</label><div class="choice-row" id="modeChoices"><button class="choice active" data-mode="solo">🧑 Solo</button><button class="choice" data-mode="duo">👥 Duo</button><button class="choice" data-mode="squad">🛡 Squad</button></div>
+    <label>Tingkat tantangan</label><div class="choice-row" id="difficultyChoices"><button class="choice active" data-difficulty="mudah">Mudah</button><button class="choice" data-difficulty="sedang">Sedang</button><button class="choice" data-difficulty="sulit">Sulit</button></div>
+    <button id="startBtn" class="primary-btn">MULAI PETUALANGAN <span>➜</span></button><div class="setup-note">💡 Jawab 10 soal untuk menyelesaikan misi.</div>
+  </div>
+  <div class="home-credit">Game ini dibuat oleh : <strong>Eko Angga Purnomo, S.Pd.</strong></div>
+</section>
+<section id="gameScreen" class="screen game-screen hidden">
+ <div class="game-toolbar"><button id="homeBtn" class="small-btn">⌂ Menu</button><div class="mission-name"><span class="live-dot"></span><span id="missionLabel">MISI HUTAN</span></div><div class="toolbar-actions"><button id="soundGameBtn" class="small-btn">♫</button><button id="pauseBtn" class="small-btn">Ⅱ Jeda</button></div></div>
+ <div class="hud"><div class="hud-block"><span class="hud-label">PAHLAWAN</span><div id="hearts" class="hearts">❤️❤️❤️</div></div><div class="hud-block progress-block"><span class="hud-label">PROGRES MISI</span><div class="progress-track"><div id="progressFill"></div></div><small id="progressText">0 / 10 soal</small></div><div class="hud-block score-block"><span class="hud-label">SKOR</span><strong id="scoreText">0000</strong></div></div>
+ <div class="game-stage" id="gameStage"><canvas id="gameCanvas" aria-label="Arena permainan"></canvas><div class="stage-badge" id="stageBadge">🌳 HUTAN NUSANTARA</div><div class="toast" id="gameToast">Arahkan bidikan ke musuh!</div>
+ <div id="pauseOverlay" class="overlay hidden"><div class="overlay-card"><div class="overlay-icon">Ⅱ</div><h2>Petualangan dijeda</h2><p>Tarik napas, pahlawan. Hutan menunggumu.</p><button id="resumeBtn" class="primary-btn">LANJUTKAN</button><button id="pauseHomeBtn" class="secondary-btn">KEMBALI KE MENU</button></div></div>
+ <div id="questionOverlay" class="overlay hidden"><div class="question-card"><div class="question-top"><span id="questionSubject">MATEMATIKA • KELAS 3</span><span id="questionCount">SOAL 1/10</span></div><div class="question-progress"><div id="questionProgressFill"></div></div><div class="question-tag">⚡ MUSUH DIKALAHKAN — TANTANGAN BELAJAR</div><h2 id="questionText">Berapa hasilnya?</h2><div id="answerOptions" class="answer-options"></div><div id="answerFeedback" class="answer-feedback" aria-live="polite">Pilih jawaban yang menurutmu benar.</div><button id="nextQuestionBtn" class="primary-btn hidden">LANJUTKAN MISI ➜</button></div></div>
+ <div id="resultOverlay" class="overlay hidden"><div class="overlay-card result-card"><div class="result-medal">🏆</div><div class="eyebrow">MISI SELESAI</div><h2 id="resultTitle">Hebat, Pahlawan!</h2><p id="resultMessage">Kamu berhasil menyelesaikan tantangan.</p><div class="result-stats"><div><strong id="finalScore">0</strong><span>Skor akhir</span></div><div><strong id="finalStars">★★★</strong><span>Bintang</span></div><div><strong id="finalCorrect">0/10</strong><span>Jawaban benar</span></div></div><button id="replayBtn" class="primary-btn">MAIN LAGI ↻</button><button id="resultHomeBtn" class="secondary-btn">KEMBALI KE MENU</button></div></div>
+ </div>
+ <div class="controls-hint"><span>⌨️ <b>Laptop:</b> A/D atau ←/→ bergerak • Spasi lompat • J tembak • Shift lari</span><span>📱 <b>HP:</b> gunakan tombol arah, lompat, dan tembak</span></div>
+ <div class="touch-controls"><div class="move-controls"><button id="leftBtn" class="control-btn">◀</button><button id="rightBtn" class="control-btn">▶</button><button id="jumpBtn" class="control-btn jump-control">⤒<small>LOMPAT</small></button></div><div class="action-controls"><button id="attackBtn" class="control-btn attack-control">✦<small>SERANG</small></button><button id="fireBtn" class="control-btn fire-control">➤<small>TEMBAK</small></button></div></div>
+ <div class="game-footer"><span>🌟 Kumpulkan skor dengan menjawab soal</span><span id="difficultyLabel">TANTANGAN MUDAH</span></div>
+</section>
+</main><footer class="site-footer">Belajar sambil berpetualang • Dirancang untuk layar HP, laptop, dan papan interaktif</footer>
+</div><script src="game.js"></script>
+</body></html>
